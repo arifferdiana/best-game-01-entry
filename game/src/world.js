@@ -64,6 +64,7 @@ export function createWorld(random) {
     level: null,
     camera: { x: 0 },
     player: null,
+    particles,
   };
   let jumpBuffer = 0;
   let moteTimer = 0;
@@ -325,6 +326,10 @@ export function createWorld(random) {
     state.camera.x = ((Math.sin(state.time * 0.06) + 1) / 2) * span;
     particles.update(dt);
   }
+
+  // Load level 0 at creation so the title screen's attract mode and the first
+  // draw have a level to render; reset() reloads it when a run starts.
+  loadLevel(0);
 
   return {
     state,
